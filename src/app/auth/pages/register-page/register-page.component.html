@@ -1,0 +1,117 @@
+<h2 class="text-2xl font-bold mb-4">Validaciones Reactivas</h2>
+<hr class="mb-4">
+
+<div class="flex justify-center">
+    <div class="w-full max-w-2xl">
+
+        <form autocomplete="off" class="space-y-4">
+
+            <!-- Nombre -->
+            <div class="flex flex-wrap items-center mb-3">
+                <label class="w-full sm:w-1/3 font-medium">Nombre</label>
+                <div class="w-full sm:w-2/3">
+                    <input type="text"
+                           class="form-input w-full border rounded-md p-2"
+                           placeholder="Nombre del usuario">
+
+                    <span class="text-sm text-red-500">
+                        Debe de ser en formato de nombre y apellido
+                    </span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex flex-wrap items-center mb-3">
+                <label class="w-full sm:w-1/3 font-medium">Email</label>
+                <div class="w-full sm:w-2/3">
+                    <input type="email"
+                           class="form-input w-full border rounded-md p-2"
+                           placeholder="Email del usuario">
+                    <span class="text-sm text-red-500">
+                        mensaje de error del email
+                    </span>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="flex flex-wrap items-center mb-3">
+                <label class="w-full sm:w-1/3 font-medium">Username</label>
+                <div class="w-full sm:w-2/3">
+                    <input type="text"
+                           class="form-input w-full border rounded-md p-2"
+                           placeholder="Nombre código del usuario">
+                    <span class="text-sm text-red-500">
+                         El username no puede ser Strider
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="flex flex-wrap items-center mb-3">
+                <label class="w-full sm:w-1/3 font-medium">Password</label>
+                <div class="w-full sm:w-2/3">
+                    <input type="password"
+                           class="form-input w-full border rounded-md p-2"
+                           placeholder="Password de su cuenta">
+
+                    <span class="text-sm text-red-500">
+                         La contraseña debe de ser mayor de 6 caracteres.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Password2 -->
+            <div class="flex flex-wrap items-center mb-3">
+                <label class="w-full sm:w-1/3 font-medium">Confirmar</label>
+                <div class="w-full sm:w-2/3">
+                    <input type="password"
+                           class="form-input w-full border rounded-md p-2"
+                           placeholder="Confirmar la contraseña">
+
+                    <span class="text-sm text-red-500">
+                         Las contraseñas deben de ser iguales
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="flex justify-end">
+                <button class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600"
+                        type="submit">
+                    Crear
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- Información del Formulario -->
+<div class="mt-6 space-y-4">
+    <h2 class="text-lg font-semibold">Form Valid:</h2>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h2 class="text-lg font-semibold">Form Status:</h2>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h2 class="text-lg font-semibold">Form Pending:</h2>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h2 class="text-lg font-semibold">Form errors</h2>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h5 class="text-md font-semibold">Nombre</h5>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h5 class="text-md font-semibold">Email</h5>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h5 class="text-md font-semibold">Username</h5>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h5 class="text-md font-semibold">Password</h5>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+
+    <h5 class="text-md font-semibold">Confirmar</h5>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ 'formulario' | json }}</pre>
+</div>
