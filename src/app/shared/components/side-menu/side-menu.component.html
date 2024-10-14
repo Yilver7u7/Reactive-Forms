@@ -1,0 +1,30 @@
+<div class="ml-3 mr-3">
+  <h2 class="text-2xl font-semibold text-center">Páginas</h2>
+  <hr class="my-4">
+
+  <h3 class="mt-6 text-xl font-medium">Reactive</h3>
+
+  <!-- Mostrar elementos del Menu -->
+  <ul class="list-none p-0 mt-3">
+    <li *ngFor="let item of reactiveMenu"
+        class="text-center border-b py-2 hover:bg-gray-100 cursor-pointer rounded-lg"
+        [routerLink]="[item.route]"
+        routerLinkActive="bg-blue-500 text-white rounded-lg"
+    >
+      {{ item.tittle }}
+    </li>
+  </ul>
+
+  <h3 class="mt-6 text-xl font-medium text-center">Validaciones</h3>
+
+  <!-- Mostrar elementos del Menu -->
+  <ul class="list-none p-0 mt-3">
+    <li *ngFor="let item of authMenu"
+        class="text-center border-b py-2 hover:bg-gray-100 cursor-pointer rounded-lg"
+        [routerLink]="[item.route]"
+        routerLinkActive="bg-blue-500 text-white rounded-lg"
+    >
+      {{ item.tittle }}
+    </li>
+  </ul>
+</div>

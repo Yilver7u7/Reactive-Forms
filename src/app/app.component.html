@@ -1,4 +1,13 @@
+<div class="flex flex-col sm:flex-row mt-5 pr-8">
 
-<router-outlet></router-outlet>
+  <!-- Primera columna: Router outlet -->
+  <div class="flex-1">
+    <router-outlet></router-outlet>
+  </div>
 
+  <!-- Segunda columna: Shared side menu -->
+  <div class="w-full sm:w-1/4 mt-5 sm:mt-0">
+    <shared-side-menu></shared-side-menu>
+  </div>
 
+</div>
