@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms'; //Modulo FormModule
 import { CommonModule } from '@angular/common';
 
 import { ReactiveRoutingModule } from './reactive-routing.module';
@@ -15,6 +16,7 @@ import { SwitchesPageComponent } from './pages/switches-page/switches-page.compo
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,//Modulo FOrmModule
     ReactiveRoutingModule
   ]
 })
