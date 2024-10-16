@@ -66,22 +66,38 @@
 
 <div class="grid grid-cols-1 gap-6 mt-6">
     <div class="w-full">
+      <!-- SI cumple con las validaciones pertinentes -->
         <span class="font-semibold text-gray-700">Valid</span>
-        <pre class="bg-gray-100 p-3 rounded-md">{{ 'objeto' | json }}</pre>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.valid | json }}</pre>
 
+        <!-- Nos indica si despues de ser enviado la persona a tocado el formulario -->
         <span class="font-semibold text-gray-700">Pristine</span>
-        <pre class="bg-gray-100 p-3 rounded-md">{{ 'objeto' | json }}</pre>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.pristine | json }}</pre>
 
+        <!-- Si tocaron el formulario -->
         <span class="font-semibold text-gray-700">Touched</span>
-        <pre class="bg-gray-100 p-3 rounded-md">{{ 'objeto' | json }}</pre>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.touched | json }}</pre>
 
+        <!-- Valor en formato en JSON  -->
         <span class="font-semibold text-gray-700">Value</span>
-        <pre class="bg-gray-100 p-3 rounded-md">{{ 'objeto' | json }}</pre>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.value| json }}</pre>
 
+        <!-- Valor del price -->
         <span class="font-semibold text-gray-700">Precio</span>
-        <pre class="bg-gray-100 p-3 rounded-md">{{ 'objeto' | json }}</pre>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.controls['price'].value | json }}</pre>
 
-        <span class="font-semibold text-gray-700">Producto</span>
-        <pre class="bg-gray-100 p-3 rounded-md">{{ 'objeto' | json }}</pre>
+        <!-- Si no cumple con la validacion de 0 numeros negativos -->
+        <span class="font-semibold text-gray-700">Precio Errors</span>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.controls['price'].errors| json }}</pre>
+
+        <!-- Valor del name -->
+        <span class="font-semibold text-gray-700">Producto Value</span>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.controls['name'].value | json }}</pre>
+
+        <!-- Si no cumple con la validacion solicitada de al menos 3 digitos
+         Retorna el valor en formato Json -->
+        <span class="font-semibold text-gray-700">Producto Errors</span>
+        <pre class="bg-gray-100 p-3 rounded-md">{{ myForm.controls['name'].errors| json }}</pre>
+
     </div>
 </div>
