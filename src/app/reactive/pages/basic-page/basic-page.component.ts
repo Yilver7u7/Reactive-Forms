@@ -1,13 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+
+const rtx5090 = {
+  name: 'RX5090',
+  price: 3000,
+  inStorage: 0
+}
+
 
 @Component({
   templateUrl: './basic-page.component.html',
   styles: ``
 })
-export class BasicPageComponent {
+export class BasicPageComponent implements OnInit {
 
   constructor( private fb: FormBuilder ){}
+
+  //En el ciclo de vida de los componentes es preferible mediante el metodo reset
+  //Reset the form
+  ngOnInit(): void {
+    this.myForm.reset(rtx5090);
+  }
 
   public myForm: FormGroup = this.fb.group({
     // Con Validators contamos con un gripo de funciones
