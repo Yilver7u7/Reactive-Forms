@@ -15,9 +15,10 @@
                            formControlName="name"
                            placeholder="Nombre del producto">
 
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="isValidField('name')"
+                    class="text-sm text-red-500">
                         <!-- Debe de ser de 3 letras -->
-                        error message
+                        {{ getFieldError('name') }}
                     </span>
                 </div>
             </div>
@@ -31,7 +32,8 @@
                            formControlName="price"
                            placeholder="Precio del producto">
 
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="isValidField('price')"
+                    class="text-sm text-red-500">
                         El precio debe de ser 0 o mayor
                     </span>
                 </div>
@@ -46,7 +48,8 @@
                            formControlName="inStorage"
                            placeholder="Existencias del producto">
 
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="isValidField('inStorage')"
+                    class="text-sm text-red-500">
                          Las existencias deben de ser 0 o mayor
                     </span>
                 </div>
