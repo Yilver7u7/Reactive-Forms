@@ -48,7 +48,7 @@
                     <input [formControlName]="i"
                     placeholder=""
                     class="form-input flex-grow border rounded-l-md p-2">
-                    <button class="btn bg-red-500 text-white px-4 py-2 rounded-r-md hover:bg-red-600"
+                    <button (click)="onDeleteField( i )" class="btn bg-red-500 text-white px-4 py-2 rounded-r-md hover:bg-red-600"
                             type="button">
                         Eliminar
                     </button>
@@ -62,7 +62,8 @@
 
     <!-- Botón Guardar -->
     <div class="flex justify-end mt-4">
-        <button type="submit"
+        <button (click)="onSubmit()"
+        type="submit"
                 class="bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600"
                 >
             Guardar
