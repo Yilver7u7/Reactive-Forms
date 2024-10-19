@@ -21,9 +21,11 @@
         <label class="w-full sm:w-1/4 lg:w-1/5 font-medium">Agregar</label>
         <div class="w-full sm:w-3/4 lg:w-4/5">
             <div class="flex">
-                <input class="form-input flex-grow border rounded-l-md p-2"
+                <input [formControl]="newFavorite"
+                       class="form-input flex-grow border rounded-l-md p-2"
                        placeholder="Agregar favorito">
-                <button class="btn bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
+                <button (click)="onAddFavoriteGame()"
+                        class="btn bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600"
                         type="button">
                     Agregar favorito
                 </button>

@@ -1,5 +1,5 @@
   import { Component, OnInit } from '@angular/core';
-  import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+  import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
   @Component({
     templateUrl: './dynamic-page.component.html',
@@ -9,6 +9,7 @@
 
     constructor( private fb: FormBuilder ){}
 
+    public newFavorite: FormControl = new FormControl('', Validators.required)
 
     public dynamicForm: FormGroup = this.fb.group({
       name: ['', [ Validators.required, Validators.minLength(3) ], ],
@@ -72,6 +73,16 @@
       this.favoriteGames.removeAt( index );
     }
 
+
+    onAddFavoriteGame(){
+      if( this.newFavorite.invalid ) return;
+
+      const newGame = this.newFavorite.value;
+
+      this.favoriteGames.push(
+        this.fb.control( newGame, Validators.required)
+      )
+    }
 
     onSubmit(): void{
       if( this.dynamicForm.invalid ){
