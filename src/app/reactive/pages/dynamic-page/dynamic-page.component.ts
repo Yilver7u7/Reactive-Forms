@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   templateUrl: './dynamic-page.component.html',
@@ -28,6 +28,46 @@ export class DynamicPageComponent {
     //Esto es para que el sepa que se trata de un array y permita iterarlo
     return this.dynamicForm.get('favoriteGames') as FormArray;
   }
+
+  /**
+ * Verifica si un campo específico en el formulario es válido.
+ *
+ * @param {string} field - El nombre del campo en el formulario.
+ * @returns {boolean | null} - Retorna `true` si el campo tiene errores y ha sido tocado;
+ * `false` si está bien o no ha sido tocado; o `null` si el campo no se encuentra en el formulario.
+ */
+isValidField(field: string): boolean | null {
+  // Verifica si el campo tiene errores y ha sido tocado
+  return this.dynamicForm.controls[field].errors && this.dynamicForm.controls[field].touched;
+}
+
+//Verifica si el campo especifico dentro del FormArray válido.
+  isValidFieldInArray( formArray: FormArray, index: number ) {
+    return formArray.controls[index].errors
+        && formArray.controls[index].touched;
+  }
+
+
+  getFieldError( field: string ): string | null {
+
+    if ( !this.dynamicForm.controls[field] ) return null;
+
+    const errors = this.dynamicForm.controls[field].errors || {};
+
+    for (const key of Object.keys(errors) ) {
+      switch( key ) {
+        case 'required':
+          return 'Este campo es requerido';
+
+        case 'minlength':
+          return `Mínimo ${ errors['minlength'].requiredLength } caracters.`;
+      }
+    }
+
+    return null;
+  }
+
+
 
   onSubmit(): void{
     if( this.dynamicForm.invalid ){
