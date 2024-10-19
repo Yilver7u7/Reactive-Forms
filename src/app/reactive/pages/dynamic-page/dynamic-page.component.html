@@ -39,13 +39,14 @@
 
           <div class="mb-1"
 
-               *ngFor="let favorite of favoriteGames.controls; let i = index"
+               *ngFor="let favorite of favoriteGames.controls | keyvalue; let i = index"
           >
           <!-- Una vez tenemos el arreglo de elementos podemos empezar a
                mostrar las iteraciones de este -->
                 <div class="flex">
                   <!-- Muestra cada una de la posiciones index donde ha estdo -->
                     <input [formControlName]="i"
+                    placeholder=""
                     class="form-input flex-grow border rounded-l-md p-2">
                     <button class="btn bg-red-500 text-white px-4 py-2 rounded-r-md hover:bg-red-600"
                             type="button">

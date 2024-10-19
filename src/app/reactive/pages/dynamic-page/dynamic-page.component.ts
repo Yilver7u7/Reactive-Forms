@@ -5,13 +5,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './dynamic-page.component.html',
   styles: ``
 })
-export class DynamicPageComponent implements OnInit {
+export class DynamicPageComponent {
 
   constructor( private fb: FormBuilder ){}
 
-  ngOnInit(): void {
-    this.dynamicForm.reset();
-  }
 
   public dynamicForm: FormGroup = this.fb.group({
     name: ['', [ Validators.required, Validators.maxLength(3) ], ],
@@ -37,6 +34,7 @@ export class DynamicPageComponent implements OnInit {
       this.dynamicForm.markAllAsTouched();
       return
     }
+    this.dynamicForm.reset();
 
   }
 
