@@ -1,13 +1,14 @@
 <h2 class="text-2xl font-bold">Reactivos: <small class="text-base font-light">Dinámicos</small></h2>
 <hr class="my-4">
 
-<form autocomplete="off">
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
     <!-- Nombre -->
     <div class="mb-3 flex flex-wrap items-center">
         <label class="w-full sm:w-1/4 lg:w-1/5 font-medium">Nombre</label>
         <div class="w-full sm:w-3/4 lg:w-4/5">
             <input class="form-input block w-full border rounded-md p-2"
+                   formControlName="name"
                    placeholder="Nombre de la persona">
             <span class="text-sm text-red-500">
                 error message
@@ -33,10 +34,19 @@
     <!-- Lista de Juegos Favoritos -->
     <div class="mb-3 flex flex-wrap items-center">
         <label class="w-full sm:w-1/4 lg:w-1/5 font-medium">Favoritos</label>
-        <div class="w-full sm:w-3/4 lg:w-4/5">
-            <div class="mb-1">
+
+        <div class="w-full sm:w-3/4 lg:w-4/5" formArrayName="favoriteGames">
+
+          <div class="mb-1"
+
+               *ngFor="let favorite of favoriteGames.controls; let i = index"
+          >
+          <!-- Una vez tenemos el arreglo de elementos podemos empezar a
+               mostrar las iteraciones de este -->
                 <div class="flex">
-                    <input class="form-input flex-grow border rounded-l-md p-2">
+                  <!-- Muestra cada una de la posiciones index donde ha estdo -->
+                    <input [formControlName]="i"
+                    class="form-input flex-grow border rounded-l-md p-2">
                     <button class="btn bg-red-500 text-white px-4 py-2 rounded-r-md hover:bg-red-600"
                             type="button">
                         Eliminar
