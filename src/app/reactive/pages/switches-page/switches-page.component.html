@@ -1,7 +1,8 @@
 <h2 class="text-2xl font-bold mb-4">Reactivos: Switches</h2>
 <hr class="mb-4">
 
-<form autocomplete="off" class="space-y-4">
+<!-- Linkeamos el formulario -->
+<form [formGroup]="myForm" (ngSubmit)="onSave()" autocomplete="off" class="space-y-4">
 
     <!-- Radio: Género -->
     <div class="flex flex-wrap items-center mb-3">
@@ -12,6 +13,7 @@
                 <input class="form-radio h-4 w-4 text-blue-600"
                        type="radio"
                        value="M"
+                       formControlName="gender"
                        id="radioMasculino">
                 <label class="ml-2" for="radioMasculino">
                   Masculino
@@ -22,6 +24,7 @@
                 <input class="form-radio h-4 w-4 text-blue-600"
                        type="radio"
                        value="F"
+                       formControlName="gender"
                        id="radioFemenino">
                 <label class="ml-2" for="radioFemenino">
                   Femenino
@@ -38,6 +41,7 @@
             <div class="flex items-center space-x-2">
                 <input class="form-checkbox h-5 w-5 text-blue-600"
                        type="checkbox"
+                       formControlName="wantNotifications"
                        id="flexSwitchCheckChecked">
                 <label for="flexSwitchCheckChecked" class="ml-2">
                     Quiero recibir notificaciones
@@ -53,12 +57,13 @@
             <div class="flex items-center space-x-2">
                 <input class="form-checkbox h-5 w-5 text-blue-600"
                        type="checkbox"
+                       formControlName="termAndCondition"
                        id="flexCheckDefault">
                 <label for="flexCheckDefault">
                   Términos y condiciones de uso
                 </label>
             </div>
-            <span class="text-sm text-red-500">
+            <span *ngIf="isValidField('termAndCondition')" class="text-sm text-red-500">
                 Debe de aceptar las condiciones de uso
             </span>
         </div>
@@ -76,10 +81,10 @@
 
 <!-- Visualización del formulario -->
 <h5 class="text-lg font-semibold mt-6">Valor del formulario</h5>
-<pre class="bg-gray-100 p-4 rounded-md">{{ 'object' | json }}</pre>
+<pre class="bg-gray-100 p-4 rounded-md">{{ myForm.value | json }}</pre>
 
 <h5 class="text-lg font-semibold mt-6">Persona</h5>
 <pre class="bg-gray-100 p-4 rounded-md">{{ 'object' | json }}</pre>
 
 <h5 class="text-lg font-semibold mt-6">Valid</h5>
-<pre class="bg-gray-100 p-4 rounded-md">{{ 'object' | json }}</pre>
+<pre class="bg-gray-100 p-4 rounded-md">{{ myForm.valid | json }}</pre>
