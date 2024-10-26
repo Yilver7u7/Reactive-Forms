@@ -51,7 +51,7 @@ export class BasicPageComponent implements OnInit {
   //   && this.myForm.controls[ field ].touched
   // }
 
-  isValidFied( field: string ) {
+  isValidField( field: string ) {
     return this.validatorsService.isValidField( this.myForm, field);
   }
 

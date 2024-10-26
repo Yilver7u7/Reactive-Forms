@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BasicPageComponent } from './pages/basic-page/basic-page.component';
 import { DynamicPageComponent } from './pages/dynamic-page/dynamic-page.component';
 import { SwitchesPageComponent } from './pages/switches-page/switches-page.component';
+import { SelectoresPageComponent } from './pages/selectores/selectores.component';
 
 // Define las rutas específicas para este módulo utilizando la interfaz Routes
 const routes: Routes = [
@@ -21,10 +22,13 @@ const routes: Routes = [
       {path: 'dynamic', component: DynamicPageComponent },
       // Componente que se renderizará al navegar a 'dynamic'
 
-
       // Ruta para la página 'switches'
       { path: 'switches',component: SwitchesPageComponent },
         // Componente que se renderizará al navegar a 'switches'
+
+        // Ruta para la página 'selectores'
+      { path: 'selectores',component: SelectoresPageComponent },
+        // Componente que se renderizará al navegar a 'selectores'
 
       // Ruta comodín que captura cualquier ruta no definida previamente dentro de este módulo
       {  path: '**', redirectTo: 'basic' },

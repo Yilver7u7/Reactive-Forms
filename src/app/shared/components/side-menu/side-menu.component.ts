@@ -20,6 +20,7 @@ export class SideMenuComponent {
     { tittle: 'Básicos', route: './reactive/basic'},
     { tittle: 'Dinámicos', route: './reactive/dynamic'},
     { tittle: 'Switches', route: './reactive/switches'},
+    { tittle: 'Selectores', route: './reactive/selectores'},
   ]
 
   public authMenu: MenuItem[] = [

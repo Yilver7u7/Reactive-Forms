@@ -1,6 +1,6 @@
   import { Component, OnInit } from '@angular/core';
   import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ValidatorsService } from '../../../shared/services/validators.service';
+  import { ValidatorsService } from '../../../shared/services/validators.service';
 
   @Component({
     templateUrl: './dynamic-page.component.html',
