@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { ValidatorsService } from '../../../shared/services/validators.service';
 
 const rtx5090 = {
   name: 'RX5090',
@@ -14,7 +15,7 @@ const rtx5090 = {
 })
 export class BasicPageComponent implements OnInit {
 
-  constructor( private fb: FormBuilder ){}
+  constructor( private fb: FormBuilder, private validatorsService: ValidatorsService ){}
 
   //En el ciclo de vida de los componentes es preferible mediante el metodo reset
   //Reset the form
@@ -43,12 +44,17 @@ export class BasicPageComponent implements OnInit {
     console.log( this.myForm.value );
   }
 
-  isValidField( field: string ): boolean | null{
-    //Mediante este metodo revisamos si los campos cuenta con algun error
-    //Es decir que no estan cumpliendo con las validaciones
-    return this.myForm.controls[ field ].errors
-    && this.myForm.controls[ field ].touched
+  // isValidField( field: string ): boolean | null{
+     //Mediante este metodo revisamos si los campos cuenta con algun error
+     //Es decir que no estan cumpliendo con las validaciones
+  //   return this.myForm.controls[ field ].errors
+  //   && this.myForm.controls[ field ].touched
+  // }
+
+  isValidFied( field: string ) {
+    return this.validatorsService.isValidField( this.myForm, field);
   }
+
 
   getFieldError( field: string ): string | null{
     //Hacemos una vaalidacion para saber si recibimos o no correctamen

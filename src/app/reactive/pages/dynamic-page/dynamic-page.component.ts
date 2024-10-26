@@ -1,5 +1,6 @@
   import { Component, OnInit } from '@angular/core';
   import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidatorsService } from '../../../shared/services/validators.service';
 
   @Component({
     templateUrl: './dynamic-page.component.html',
@@ -7,7 +8,7 @@
   })
   export class DynamicPageComponent {
 
-    constructor( private fb: FormBuilder ){}
+    constructor( private fb: FormBuilder, private validatorServices: ValidatorsService ){}
 
     public newFavorite: FormControl = new FormControl('', Validators.required)
 
@@ -37,9 +38,9 @@
    * @returns {boolean | null} - Retorna `true` si el campo tiene errores y ha sido tocado;
    * `false` si está bien o no ha sido tocado; o `null` si el campo no se encuentra en el formulario.
    */
-  isValidField(field: string): boolean | null {
+  isValidField(field: string) {
     // Verifica si el campo tiene errores y ha sido tocado
-    return this.dynamicForm.controls[field].errors && this.dynamicForm.controls[field].touched;
+    return this.validatorServices.isValidField( this.dynamicForm, field );
   }
 
   //Verifica si el campo especifico dentro del FormArray válido.
