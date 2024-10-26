@@ -29,6 +29,7 @@ export class SwitchesPageComponent implements OnInit {
   isValidField( field: string ) {
     return this.validatorServices.isValidField( this.myForm, field );
   }
+  
 
   //ngSubmit
   onSave(){
