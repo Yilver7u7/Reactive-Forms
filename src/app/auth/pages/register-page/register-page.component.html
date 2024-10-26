@@ -15,7 +15,7 @@
                            class="form-input w-full border rounded-md p-2"
                            placeholder="Nombre del usuario">
 
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="inValidField('name')" class="text-sm text-red-500">
                         Debe de ser en formato de nombre y apellido
                     </span>
                 </div>
@@ -29,7 +29,7 @@
                            formControlName="email"
                            class="form-input w-full border rounded-md p-2"
                            placeholder="Email del usuario">
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="inValidField('email')" class="text-sm text-red-500">
                         mensaje de error del email
                     </span>
                 </div>
@@ -40,10 +40,10 @@
                 <label class="w-full sm:w-1/3 font-medium">Username</label>
                 <div class="w-full sm:w-2/3">
                     <input type="text"
-                           formControlName="name"
+                           formControlName="username"
                            class="form-input w-full border rounded-md p-2"
                            placeholder="Nombre código del usuario">
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="inValidField('username')" class="text-sm text-red-500">
                          El username no puede ser Strider
                     </span>
                 </div>
@@ -58,7 +58,7 @@
                            class="form-input w-full border rounded-md p-2"
                            placeholder="Password de su cuenta">
 
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="inValidField('password')" class="text-sm text-red-500">
                          La contraseña debe de ser mayor de 6 caracteres.
                     </span>
                 </div>
@@ -73,7 +73,7 @@
                            class="form-input w-full border rounded-md p-2"
                            placeholder="Confirmar la contraseña">
 
-                    <span class="text-sm text-red-500">
+                    <span *ngIf="inValidField('password2')" class="text-sm text-red-500">
                          Las contraseñas deben de ser iguales
                     </span>
                 </div>
@@ -106,13 +106,14 @@
     <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.errors | json }}</pre>
 
     <h5 class="text-md font-semibold">Nombre</h5>
-    <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.value.name | json }}</pre>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.controls['name'].errors| json }}</pre>
 
     <h5 class="text-md font-semibold">Email</h5>
     <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.value.email | json }}</pre>
 
+    <!-- Esto me permite ver los errores que se encuentren en este campo -->
     <h5 class="text-md font-semibold">Username</h5>
-    <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.value.username | json }}</pre>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.controls['username'].errors| json }}</pre>
 
     <h5 class="text-md font-semibold">Password</h5>
     <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.value.password | json }}</pre>
