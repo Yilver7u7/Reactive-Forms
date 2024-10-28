@@ -27,6 +27,13 @@ export class RegisterPageComponent {
     username:['', [Validators.required, this.validatorServices.cantBeStrider ]],
     password:['', [Validators.required, ]],
     password2:['', [Validators.required, ]],
+  },{
+    //Esto me permite tener acceso a todos los campos del formulario
+    //Permitiendo me tener control sobre los dos campos deseados
+    validators: [
+      //Seleccionamos los campos y los enviamos como argumentos
+      this.validatorServices.isFIeldOneEqualFieldTwo('password', 'password2')  //Esto es para validar que los dos password coincidan
+    ]
   })
 
   constructor(

@@ -119,5 +119,5 @@
     <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.value.password | json }}</pre>
 
     <h5 class="text-md font-semibold">Confirmar</h5>
-    <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.value.password2 | json }}</pre>
+    <pre class="bg-gray-100 p-4 rounded-md">{{ myForm.controls['password2'].errors| json }}</pre>
 </div>
