@@ -20,13 +20,20 @@ export class RegisterPageComponent {
     name:['', [Validators.required, Validators.minLength(3), Validators.pattern( this.validatorServices.firstNameAndLastnamePattern )]],
     //Las formas recomendadas para desarrollar la validacion en los Email
     //Sin permitir que puedan haber un campo solo por existir un arroba
-    email:['', [Validators.required, Validators.pattern( this.validatorServices.emailPattern ) ], [ new EmailValidator() ]], //Es una validacion mediante un patron de diseño
+    // email:['', [Validators.required, Validators.pattern( this.validatorServices.emailPattern ) ], [ new EmailValidator() ]], //Es una validacion mediante un patron de diseño
+
+    //Por la forma de instancia el de arriba afecta mucho mas el performace
+    email: ['', [ Validators.required, Validators.pattern( this.validatorServices.emailPattern )], [ this.emailValidator ]],
     username:['', [Validators.required, this.validatorServices.cantBeStrider ]],
     password:['', [Validators.required, ]],
     password2:['', [Validators.required, ]],
   })
 
-  constructor( private fb: FormBuilder, private validatorServices: ValidatorsService ){}
+  constructor(
+    private fb: FormBuilder,
+    private validatorServices: ValidatorsService,
+    private emailValidator: EmailValidator
+     ){}
 
   //Basicamente aca estamos delegando la funcion en funcion de nuestro servicio
   inValidField( field: string ){
