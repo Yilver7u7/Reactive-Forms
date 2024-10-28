@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 
 @Injectable({providedIn: 'root'})
 export class ValidatorsService {
@@ -26,7 +26,7 @@ export class ValidatorsService {
   isFIeldOneEqualFieldTwo( field1: string, field2: string){
 
     //Es solo una funcion que retorna una funcion que de forma asincrona hace la validacion
-    return ( formGroup: FormGroup ): ValidationErrors | null => {
+    return ( formGroup: AbstractControl ): ValidationErrors | null => {
 
       // Obtenemos los valores de los campos
       const fieldValue1 = formGroup.get( field1 )?.value;
