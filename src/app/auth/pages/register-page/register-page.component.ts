@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //Una forma util de llamar a nuestras fuciones que proviene de nuestro helper o validador
 import * as customValidators from '../../../shared/validators/validators';
 import { ValidatorsService } from '../../../shared/services/validators.service';
+import { EmailValidator } from '../../../shared/validators/email-validators';
 
 @Component({
   templateUrl: './register-page.component.html',
@@ -19,7 +20,7 @@ export class RegisterPageComponent {
     name:['', [Validators.required, Validators.minLength(3), Validators.pattern( this.validatorServices.firstNameAndLastnamePattern )]],
     //Las formas recomendadas para desarrollar la validacion en los Email
     //Sin permitir que puedan haber un campo solo por existir un arroba
-    email:['', [Validators.required, Validators.pattern( this.validatorServices.emailPattern ) ]], //Es una validacion mediante un patron de diseño
+    email:['', [Validators.required, Validators.pattern( this.validatorServices.emailPattern ) ], [ new EmailValidator() ]], //Es una validacion mediante un patron de diseño
     username:['', [Validators.required, this.validatorServices.cantBeStrider ]],
     password:['', [Validators.required, ]],
     password2:['', [Validators.required, ]],
