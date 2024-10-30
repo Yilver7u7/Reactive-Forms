@@ -1,1 +1,26 @@
-<p>selectores works!</p>
+<h1 class="mt-3 text-xl font-semibold">Selectores anidados</h1>
+<hr class="my-3 border-gray-300">
+
+<form [formGroup]="myForm" (ngSubmit)="onSave()">
+
+  <div class="mb-3">
+
+    <div class="w-full">
+      <label class="block text-gray-700 font-medium mb-2">Continente:</label>
+      <!-- Podemos hacer los enlaces de forma dinamica -->
+      <select formControlName="region" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">-- Seleccione Continente --</option>
+      </select>
+    </div>
+  </div>
+
+</form>
+
+<h3>Formulario</h3>
+<code>
+  {{ myForm.value | json}}
+</code>
+
+<p>
+  is Form Valid: {{ myForm.valid }}
+</p>
