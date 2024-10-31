@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries.service';
 import { Region } from '../../interfaces/country.interfaces';
-import { switchMap } from 'rxjs';
+import { switchMap, catchError } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-selectores',
@@ -14,35 +15,50 @@ export class SelectoresPageComponent implements OnInit {
     region: ['', Validators.required],
     country: ['', Validators.required],
     borders: ['', Validators.required],
-  })
-
+  });
 
   constructor(
     private fb: FormBuilder,
-    private countriesService:CountriesService
-  ){}
+    private countriesService: CountriesService
+  ) {}
 
   ngOnInit(): void {
     this.onRegionChanged();
   }
 
   // Apuntamos por referencia al lugar donde tenemos nuestras regiones
-  get regions():Region[]{
+  get regions(): Region[] {
     return this.countriesService.regions;
   }
 
-  onRegionChanged(): void{
+  onRegionChanged(): void {
     this.myForm.get('region')!.valueChanges
-    .pipe(
-      switchMap( region => this.countriesService.getCuntriesByRegion(region))
-    )
-    .subscribe( countries => {
-      console.log({countries});
-    })
+      .pipe(
+        switchMap(region => {
+          // Limpiar los campos de country y borders cuando cambia la región
+          this.myForm.get('country')!.reset();
+          this.myForm.get('borders')!.reset();
+
+          return this.countriesService.getCountriesByRegion(region).pipe(
+            catchError(err => {
+              console.error('Error fetching countries', err);
+              return of([]); // Retorna un arreglo vacío en caso de error
+            })
+          );
+        })
+      )
+      .subscribe(countries => {
+        console.log({ countries });
+        // Aquí podrías manejar la lógica para actualizar la lista de países en el formulario
+      });
   }
 
   onSave(): void {
-
+    // Lógica para guardar el formulario
+    if (this.myForm.valid) {
+      console.log('Formulario guardado:', this.myForm.value);
+    } else {
+      console.log('Formulario no válido');
+    }
   }
-
 }
