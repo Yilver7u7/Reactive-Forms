@@ -19,7 +19,8 @@ import { SelectoresPageComponent } from './pages/selectores/selectores.component
   imports: [
     CommonModule,
     ReactiveFormsModule,//Modulo FormModule
-    ReactiveRoutingModule
+    ReactiveRoutingModule,
+
   ]
 })
 export class ReactiveModule { }

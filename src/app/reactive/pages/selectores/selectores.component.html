@@ -3,6 +3,7 @@
 
 <form [formGroup]="myForm" (ngSubmit)="onSave()" class="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg">
 
+  <!-- Region -->
   <div class="mb-4">
     <div class="w-full">
       <label class="block text-gray-700 font-semibold mb-2">Continente:</label>
@@ -11,6 +12,25 @@
                 class="w-full px-4 py-3 border border-gray-300 rounded-md bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out appearance-none">
           <option value="" class="text-gray-400">-- Seleccione Continente --</option>
           <option *ngFor="let region of regions" [value]="region">{{region}}</option>
+        </select>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 10l5 5 5-5H7z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="mb-4">
+    <div class="w-full">
+      <label class="block text-gray-700 font-semibold mb-2">Pais:</label>
+      <div class="relative">
+        <select formControlName="country"
+                class="w-full px-4 py-3 border border-gray-300 rounded-md bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out appearance-none">
+          <option value="" class="text-gray-400">-- Seleccione Pais --</option>
+          
         </select>
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
           <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
