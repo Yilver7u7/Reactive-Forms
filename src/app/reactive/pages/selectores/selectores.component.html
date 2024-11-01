@@ -29,8 +29,8 @@
       <div class="relative">
         <select formControlName="country"
                 class="w-full px-4 py-3 border border-gray-300 rounded-md bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 ease-in-out appearance-none">
-          <option value="" class="text-gray-400">-- Seleccione Pais --</option>
-          
+          <option *ngFor="let country of countriesByRegion" [value]="country.cca3" class="text-gray-400">{{ country.name  }}</option>
+
         </select>
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
           <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

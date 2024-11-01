@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries.service';
-import { Region } from '../../interfaces/country.interfaces';
+import { Region, SmallCountry } from '../../interfaces/country.interfaces';
 import { switchMap, catchError } from 'rxjs';
 import { of } from 'rxjs';
 
@@ -10,6 +10,8 @@ import { of } from 'rxjs';
   templateUrl: './selectores.component.html',
 })
 export class SelectoresPageComponent implements OnInit {
+
+  public countriesByRegion: SmallCountry[] = [];
 
   public myForm: FormGroup = this.fb.group({
     region: ['', Validators.required],
@@ -48,6 +50,7 @@ export class SelectoresPageComponent implements OnInit {
         })
       )
       .subscribe(countries => {
+        this.countriesByRegion = countries;
         console.log({ countries });
         // Aquí podrías manejar la lógica para actualizar la lista de países en el formulario
       });
