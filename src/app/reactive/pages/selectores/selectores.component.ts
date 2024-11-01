@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries.service';
 import { Region, SmallCountry } from '../../interfaces/country.interfaces';
-import { switchMap, catchError } from 'rxjs';
+import { switchMap, catchError, tap } from 'rxjs';
 import { of } from 'rxjs';
 
 @Component({
@@ -12,6 +12,7 @@ import { of } from 'rxjs';
 export class SelectoresPageComponent implements OnInit {
 
   public countriesByRegion: SmallCountry[] = [];
+  public borders: SmallCountry[] = [];
 
   public myForm: FormGroup = this.fb.group({
     region: ['', Validators.required],
@@ -33,28 +34,39 @@ export class SelectoresPageComponent implements OnInit {
     return this.countriesService.regions;
   }
 
+  // onRegionChanged(): void {
+  //   this.myForm.get('region')!.valueChanges
+  //     .pipe(
+  //       tap(() => this.myForm.get('country')!.setValue('')), // Resetea el campo country
+  //       switchMap(region => {
+  //         // Llama al servicio para obtener los países de la región seleccionada
+  //         return this.countriesService.getCountriesByRegion(region).pipe(
+  //           catchError(err => {
+  //             console.error('Error fetching countries', err);
+  //             return of([]); // Retorna un arreglo vacío en caso de error
+  //           })
+  //         );
+  //       })
+  //     )
+  //     .subscribe(countries => {
+  //       // Ordena los países alfabéticamente antes de asignarlos
+  //       this.countriesByRegion = countries.sort((a, b) => a.name.localeCompare(b.name));
+  //       console.log({ countries: this.countriesByRegion });
+  //     });
+  // }
+
   onRegionChanged(): void {
     this.myForm.get('region')!.valueChanges
       .pipe(
-        switchMap(region => {
-          // Limpiar los campos de country y borders cuando cambia la región
-          this.myForm.get('country')!.reset();
-          this.myForm.get('borders')!.reset();
-
-          return this.countriesService.getCountriesByRegion(region).pipe(
-            catchError(err => {
-              console.error('Error fetching countries', err);
-              return of([]); // Retorna un arreglo vacío en caso de error
-            })
-          );
-        })
+        tap( () => this.myForm.get('country')!.setValue('') ),
+        tap( () => this.borders = [] ),
+        switchMap( (region) => this.countriesService.getCountriesByRegion(region) ),
       )
-      .subscribe(countries => {
+      .subscribe( countries => {
         this.countriesByRegion = countries;
-        console.log({ countries });
-        // Aquí podrías manejar la lógica para actualizar la lista de países en el formulario
       });
   }
+
 
   onSave(): void {
     // Lógica para guardar el formulario
