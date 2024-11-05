@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountriesService } from '../../services/countries.service';
 import { Region, SmallCountry } from '../../interfaces/country.interfaces';
-import { switchMap, catchError, tap } from 'rxjs';
+import { switchMap, catchError, tap, filter } from 'rxjs';
 import { of } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ export class SelectoresPageComponent implements OnInit {
   public myForm: FormGroup = this.fb.group({
     region: ['', Validators.required],
     country: ['', Validators.required],
-    borders: ['', Validators.required],
+    border: ['', Validators.required],
   });
 
   constructor(
@@ -27,6 +27,7 @@ export class SelectoresPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.onRegionChanged();
+    this.OnCountryChanged();
   }
 
   // Apuntamos por referencia al lugar donde tenemos nuestras regiones
@@ -68,7 +69,21 @@ export class SelectoresPageComponent implements OnInit {
         this.countriesByRegion = countries.sort((a, b) => a.name.localeCompare(b.name));
         this.countriesByRegion = countries;
       });
-  }
+    }
+
+
+    OnCountryChanged(): void{
+      this.myForm.get( 'country' )!.valueChanges
+      .pipe(
+        tap( () => this.myForm.get('border')!.setValue('')),
+        //No sirve como si de un if se tratase
+        filter( (value) =>  value.length > 0),
+        switchMap( (alphaCode) => this.countriesService.getCountryByAlphaCode(alphaCode)),
+      )
+      .subscribe( borders => {
+        console.log( borders );
+      })
+    }
 
 
   onSave(): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Country, Region, SmallCountry } from '../interfaces/country.interfaces';
-import { Observable, of, tap, map } from 'rxjs'; 
+import { Observable, of, tap, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CountriesService {
@@ -34,4 +34,19 @@ export class CountriesService {
       tap(response => console.log(response)) // Loguea la respuesta
     );
   }
+
+  getCountryByAlphaCode( alphaCode: string ): Observable<SmallCountry>{
+    const url = `${this.baseUrl}alpha/${alphaCode}?fields=cca,name,borders`;
+    //Retorna el limite del pais
+    return this.httpClient.get<Country>( url )
+    .pipe(
+      map( country =>({
+        name: country.name.common,
+        cca3: country.cca3,
+        borders: country.borders?? [],
+      }))
+    )
+  }
+
+
 }
