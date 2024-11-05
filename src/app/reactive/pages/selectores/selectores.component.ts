@@ -33,6 +33,7 @@ export class SelectoresPageComponent implements OnInit {
   get regions(): Region[] {
     return this.countriesService.regions;
   }
+  //This is other way to do the same thing
 
   // onRegionChanged(): void {
   //   this.myForm.get('region')!.valueChanges
@@ -63,6 +64,8 @@ export class SelectoresPageComponent implements OnInit {
         switchMap( (region) => this.countriesService.getCountriesByRegion(region) ),
       )
       .subscribe( countries => {
+        // Ordenamos los países alfabéticamente antes de asignarlos
+        this.countriesByRegion = countries.sort((a, b) => a.name.localeCompare(b.name));
         this.countriesByRegion = countries;
       });
   }
