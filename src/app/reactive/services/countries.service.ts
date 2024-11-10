@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Country, Region, SmallCountry } from '../interfaces/country.interfaces';
-import { Observable, of, tap, map } from 'rxjs';
+import { Observable, of, tap, map, combineLatest } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CountriesService {
@@ -35,6 +35,7 @@ export class CountriesService {
     );
   }
 
+  //Obtiene el CCA para posteriormente de esa informacion conseguir los nombre de los paises
   getCountryByAlphaCode( alphaCode: string ): Observable<SmallCountry>{
     const url = `${this.baseUrl}alpha/${alphaCode}?fields=cca,name,borders`;
     //Retorna el limite del pais
@@ -46,6 +47,22 @@ export class CountriesService {
         borders: country.borders?? [],
       }))
     )
+  }
+
+  getCountriesBordersByCodes( borders: string[] ): Observable<SmallCountry[]>{
+    // En caso tal el elemento enviado no es el tipo esperando retorna un elemento vacio
+    if( !borders || borders.length === 0) return of ([]);
+
+    //Un arreglo que almacena todos los arreglos o consultas que hicimos para obtener los borders
+    const countriesRequests:Observable<SmallCountry>[] = [];
+    //Para cada uno de los elementos de nuestra consulta los agregamos en nuestro arreglo
+    borders.forEach(( code ) => {
+      const request = this.getCountryByAlphaCode( code );
+      countriesRequests.push( request );
+    })
+//Causa todos los Obsevables al mismo tiempo no
+    return combineLatest( countriesRequests );
+
   }
 
 

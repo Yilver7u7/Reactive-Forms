@@ -79,9 +79,11 @@ export class SelectoresPageComponent implements OnInit {
         //No sirve como si de un if se tratase
         filter( (value) =>  value.length > 0),
         switchMap( (alphaCode) => this.countriesService.getCountryByAlphaCode(alphaCode)),
+        switchMap( country  => this.countriesService.getCountriesBordersByCodes( country.borders))
       )
-      .subscribe( borders => {
-        console.log( borders );
+      .subscribe( countries => {
+        this.borders = countries;
+        console.log( countries );
       })
     }
 
